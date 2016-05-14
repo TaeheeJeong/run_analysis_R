@@ -1,0 +1,45 @@
+### set your working directory
+setwd(" ")
+### remove objects and clearing memory
+rm(list=ls())
+### load train data and train label
+train  <- read.table("./train/X_train.txt",header = FALSE)
+train_label  <- read.table("./train/y_train.txt",header = FALSE)
+### load test data and test label
+test  <- read.table("./test/X_test.txt",header = FALSE)
+test_label  <- read.table("./test/y_test.txt",header = FALSE)
+#1. merges the training and the test sets to create one data set
+all_data<-rbind(train, test)
+write.csv(all_data,"all_data.csv")
+#2. Extracts only the measurements on the mean and standard deviation for each measurement
+mean_data=sapply(all_data,mean)
+write.csv(mean_data,"mean_data.csv")
+
+sd_data=sapply(all_data, sd)
+write.csv(sd_data,"sd_data.csv")
+
+### load feature (descriptivive activity names)
+feature <- read.table("features.txt",header = FALSE)
+#3 name variable names as descriptive activity names
+names(all_data)<-feature$V2
+
+### make activity dictionary type
+activity<-c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING")
+names(activity)<-c(1,2,3,4,5,6)
+### sapply using activity as function
+desc_act<-function(x){activity[x]}
+
+all_label<-rbind(train_label,test_label)
+all_activity=sapply(all_label,desc_act)
+
+### add activity column to all_data 
+all_activity2<-data.frame(all_activity)
+library(dplyr)
+all_activity2<-rename(all_activity2,activity=V1)
+#4 label the dataset  
+all_data2<-cbind(all_data,all_activity2)
+
+#5 Create second, independent tidy data set with average of each variable for each activity and each subject
+new_data<-aggregate(all_data2[, 1:561], list(all_data2$activity), mean)
+new_data<-rename(new_data,activity=Group.1)
+write.csv(new_data,"new_data.csv")
