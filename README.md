@@ -1,4 +1,4 @@
-## run_analysis_R
+### run_analysis_R
 
 # Assignment: Getting and Cleaning Data Course Project
 # author: Taehee Jeong
