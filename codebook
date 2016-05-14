@@ -1,4 +1,10 @@
-# Variables
+# activity label
+                   1                    2                    3 
+           "WALKING"   "WALKING_UPSTAIRS" "WALKING_DOWNSTAIRS" 
+                   4                    5                    6 
+           "SITTING"           "STANDING"             "LAYING" 
+
+# measurement as Variables
   [1] tBodyAcc-mean()-X                   
   [2] tBodyAcc-mean()-Y                   
   [3] tBodyAcc-mean()-Z                   
