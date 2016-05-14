@@ -1,8 +1,8 @@
-# run_analysis_R
+## run_analysis_R
 
- Assignment: Getting and Cleaning Data Course Project
- author: Taehee Jeong
- date: 05/13/2016
+# Assignment: Getting and Cleaning Data Course Project
+# author: Taehee Jeong
+# date: 05/13/2016
 
 # read train data 
 train  <- read.table("./train/X_train.txt",header = FALSE)
